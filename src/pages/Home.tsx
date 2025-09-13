@@ -8,6 +8,10 @@ export default function Home() {
   const ringMidRef = useRef<HTMLDivElement | null>(null)
   const ringInnerRef = useRef<HTMLDivElement | null>(null)
   const chooserBgRef = useRef<HTMLDivElement | null>(null)
+  const diveTextRef = useRef<HTMLDivElement | null>(null)
+  const intoTextRef = useRef<HTMLDivElement | null>(null)
+  const betterTextRef = useRef<HTMLDivElement | null>(null)
+  const healthTextRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -53,9 +57,113 @@ export default function Home() {
       )
     }
 
+    // DIVE text parallax animation
+    let diveAnimation: gsap.core.Tween | undefined
+    if (diveTextRef.current) {
+      diveAnimation = gsap.fromTo(
+        diveTextRef.current,
+        {
+          x: '0vw',
+          y: '0vh',
+          scale: 2.5 // Start bigger as it enters
+        },
+        {
+          x: '-80vw', // More prominent movement - goes from 50vw to -50vw (off screen)
+          y: '-175vh', // 1.75x faster than scroll
+          scale: 0.5, // Gets smaller as it goes out
+          ease: 'none',
+          scrollTrigger: {
+            trigger: diveTextRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      )
+    }
+
+    // INTO text parallax animation
+    let intoAnimation: gsap.core.Tween | undefined
+    if (intoTextRef.current) {
+      intoAnimation = gsap.fromTo(
+        intoTextRef.current,
+        {
+          x: '0vw',
+          y: '0vh',
+          scale: 2.5 // Start bigger as it enters
+        },
+        {
+          x: '-80vw',
+          y: '-175vh',
+          scale: 0.5, // Gets smaller as it goes out
+          ease: 'none',
+          scrollTrigger: {
+            trigger: intoTextRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      )
+    }
+
+    // BETTER text parallax animation
+    let betterAnimation: gsap.core.Tween | undefined
+    if (betterTextRef.current) {
+      betterAnimation = gsap.fromTo(
+        betterTextRef.current,
+        {
+          x: '0vw',
+          y: '0vh',
+          scale: 2.5 // Start bigger as it enters
+        },
+        {
+          x: '-80vw',
+          y: '-175vh',
+          scale: 0.5, // Gets smaller as it goes out
+          ease: 'none',
+          scrollTrigger: {
+            trigger: betterTextRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      )
+    }
+
+    // HEALTH text parallax animation
+    let healthAnimation: gsap.core.Tween | undefined
+    if (healthTextRef.current) {
+      healthAnimation = gsap.fromTo(
+        healthTextRef.current,
+        {
+          x: '0vw',
+          y: '0vh',
+          scale: 2.5 // Start bigger as it enters
+        },
+        {
+          x: '-80vw',
+          y: '-175vh',
+          scale: 0.5, // Gets smaller as it goes out
+          ease: 'none',
+          scrollTrigger: {
+            trigger: healthTextRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      )
+    }
+
     return () => {
       tween.kill()
       fadeIn?.kill()
+      diveAnimation?.kill()
+      intoAnimation?.kill()
+      betterAnimation?.kill()
+      healthAnimation?.kill()
       ScrollTrigger.getAll().forEach((st) => st.kill())
       document.documentElement.style.backgroundColor = '#fcde47'
     }
@@ -89,10 +197,24 @@ export default function Home() {
   const indexRef = useRef(0)
 
   useEffect(() => {
-    // continuous subtle rotation
+    // continuous infinite rotation without snap-back
     const tweens: gsap.core.Tween[] = []
-    if (ringMidRef.current) tweens.push(gsap.to(ringMidRef.current, { rotate: -360, duration: 80, ease: 'none', repeat: -1 }))
-    if (ringInnerRef.current) tweens.push(gsap.to(ringInnerRef.current, { rotate: 360, duration: 100, ease: 'none', repeat: -1 }))
+    if (ringMidRef.current) {
+      tweens.push(gsap.to(ringMidRef.current, { 
+        rotation: '-=360', 
+        duration: 80, 
+        ease: 'none', 
+        repeat: -1 
+      }))
+    }
+    if (ringInnerRef.current) {
+      tweens.push(gsap.to(ringInnerRef.current, { 
+        rotation: '+=360', 
+        duration: 100, 
+        ease: 'none', 
+        repeat: -1 
+      }))
+    }
     return () => { tweens.forEach(t => t.kill()) }
   }, [])
 
@@ -152,9 +274,73 @@ export default function Home() {
       </section>
 
       {/* New section below chooser */}
-      <section style={{ minHeight: '100vh', backgroundColor: '#c0f0f5', padding: '2rem 0' }}>
+      <section style={{ minHeight: '300vh', backgroundColor: '#c0f0f5', padding: '2rem 0', position: 'relative', overflow: 'hidden' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
           {/* Content for the new section can be added here */}
+        </div>
+        
+        {/* DIVE text with HELLO styling */}
+        <div 
+          ref={diveTextRef}
+          className="home-title"
+          style={{
+            position: 'absolute',
+            bottom: '200vh',
+            left: '60vw',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            pointerEvents: 'none'
+          }}
+        >
+          DIVE
+        </div>
+
+        {/* INTO text with HELLO styling */}
+        <div 
+          ref={intoTextRef}
+          className="home-title"
+          style={{
+            position: 'absolute',
+            bottom: '150vh',
+            left: '60vw',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            pointerEvents: 'none'
+          }}
+        >
+          INTO
+        </div>
+
+        {/* BETTER text with HELLO styling */}
+        <div 
+          ref={betterTextRef}
+          className="home-title"
+          style={{
+            position: 'absolute',
+            bottom: '100vh',
+            left: '60vw',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            pointerEvents: 'none'
+          }}
+        >
+          BETTER
+        </div>
+
+        {/* HEALTH text with HELLO styling */}
+        <div 
+          ref={healthTextRef}
+          className="home-title"
+          style={{
+            position: 'absolute',
+            bottom: '50vh',
+            left: '60vw',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            pointerEvents: 'none'
+          }}
+        >
+          HEALTH
         </div>
       </section>
     </main>
