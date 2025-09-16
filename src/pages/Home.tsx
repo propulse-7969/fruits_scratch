@@ -14,6 +14,7 @@ export default function Home() {
   const healthTextRef = useRef<HTMLDivElement | null>(null)
   const purpleSectionRef = useRef<HTMLElement | null>(null)
   const greenSectionRef = useRef<HTMLElement | null>(null)
+  const finalSectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -241,6 +242,40 @@ export default function Home() {
       })
     }
 
+    // Background color transition from green to yellow for final section entrance
+    let finalEntranceTransition: gsap.core.Tween | undefined
+    if (finalSectionRef.current) {
+      finalEntranceTransition = gsap.fromTo(document.documentElement, {
+        backgroundColor: '#cbef9a'
+      }, {
+        backgroundColor: '#fcde47',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: finalSectionRef.current,
+          start: 'top bottom',
+          end: 'center center',
+          scrub: true,
+        },
+      })
+    }
+
+    // Background color transition from yellow to yellow for final section
+    let finalBgTransition: gsap.core.Tween | undefined
+    if (finalSectionRef.current) {
+      finalBgTransition = gsap.fromTo(document.documentElement, {
+        backgroundColor: '#fcde47'
+      }, {
+        backgroundColor: '#fcde47',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: finalSectionRef.current,
+          start: 'center center',
+          end: 'center 30%',
+          scrub: true,
+        },
+      })
+    }
+
     return () => {
       tween.kill()
       fadeIn?.kill()
@@ -252,6 +287,8 @@ export default function Home() {
       bgColorTransition?.kill()
       purpleBgTransition?.kill()
       greenBgTransition?.kill()
+      finalEntranceTransition?.kill()
+      finalBgTransition?.kill()
       ScrollTrigger.getAll().forEach((st) => st.kill())
       document.documentElement.style.backgroundColor = '#fcde47'
     }
@@ -602,7 +639,7 @@ export default function Home() {
       </section>
 
       {/* Final section with "The Fruit That Brings a Smile" */}
-      <section style={{ 
+      <section ref={finalSectionRef} style={{ 
         minHeight: '100vh', 
         padding: '2rem',
         display: 'flex',
