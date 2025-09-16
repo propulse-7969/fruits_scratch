@@ -437,7 +437,7 @@ export default function Home() {
          <div ref={ringInnerRef} className="ring inner octagon" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '87.75vmin', aspectRatio: '1 / 1', background: themes[0].colors[2], clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', zIndex: 2 }} />
         
         <div className="chooser-wrap" style={{ position: 'relative', width: 'min(1100px, 92vw)', margin: '0 auto', zIndex: 10, display: 'flex', flexDirection: 'column', flex: 1 }}>
-          <h2 className="flavors-heading" style={{ textAlign: 'center', margin: '1rem 0 0.75rem 0', color: '#fff', position: 'relative', zIndex: 15, textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000' }}>Choose Your Fruit</h2>
+          <h2 className="flavors-heading" style={{ textAlign: 'center', margin: '1rem 0 0.75rem 0', color: '#fff', position: 'relative', zIndex: 15, textShadow: '0.5px 0.5px 0 #000, -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000' }}>Choose Your Fruit</h2>
           {/* Keep all text elements grouped at the top */}
           <div style={{ position: 'relative', zIndex: 15 }}>
             <FlavorCaption getTheme={() => themes[indexRef.current]} />
@@ -698,7 +698,7 @@ function FlavorCaption({ getTheme }: { getTheme: () => { name: string; subtitle:
         fontWeight: 700, 
         fontFamily: '"Slackey", sans-serif',
         color: '#fff',
-        textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000'
+        textShadow: '0.5px 0.5px 0 #000, -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000'
       }}>{name || '—'}</div>
       <div style={{ 
         opacity: 0.85, 
@@ -706,7 +706,7 @@ function FlavorCaption({ getTheme }: { getTheme: () => { name: string; subtitle:
         color: '#fff',
         fontSize: '1rem',
         marginTop: '0.5rem',
-        textShadow: '0.5px 0.5px 0 #000, -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000'
+        textShadow: '0.25px 0.25px 0 #000, -0.25px -0.25px 0 #000, 0.25px -0.25px 0 #000, -0.25px 0.25px 0 #000'
       }}>{subtitle || ''}</div>
     </div>
   )

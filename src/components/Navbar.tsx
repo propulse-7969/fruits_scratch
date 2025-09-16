@@ -1,4 +1,5 @@
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 const links = [
   { to: '/', label: 'Home' },
@@ -10,16 +11,28 @@ const links = [
 ]
 
 export default function Navbar() {
-  
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20
+      setScrolled(isScrolled)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <nav id="navbar">
-      <div className="nav-inner">
-        <div className="brand"><Link to="/">My Company</Link></div>
-        <ul className="nav-links">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-container">
+        <ul className="navbar-links">
           {links.map(({ to, label }) => (
             <li key={to}>
-              <NavLink to={to} className={({ isActive }: { isActive: boolean }) => (isActive ? 'active' : '')}>
+              <NavLink 
+                to={to} 
+                className={({ isActive }) => `navbar-link ${isActive ? 'active' : ''}`}
+              >
                 {label}
               </NavLink>
             </li>
