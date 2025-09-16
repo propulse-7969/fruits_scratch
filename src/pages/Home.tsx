@@ -65,12 +65,12 @@ export default function Home() {
         {
           x: '0vw',
           y: '0vh',
-          scale: 2.5 // Start bigger as it enters
+          scale: 2 // Start bigger as it enters
         },
         {
           x: '-80vw', // More prominent movement - goes from 50vw to -50vw (off screen)
           y: '-175vh', // 1.75x faster than scroll
-          scale: 0.5, // Gets smaller as it goes out
+          scale: 0.00000001, // Gets smaller as it goes out
           ease: 'none',
           scrollTrigger: {
             trigger: diveTextRef.current,
@@ -90,12 +90,12 @@ export default function Home() {
         {
           x: '0vw',
           y: '0vh',
-          scale: 2.5 // Start bigger as it enters
+          scale: 2 // Start bigger as it enters
         },
         {
           x: '-80vw',
           y: '-175vh',
-          scale: 0.5, // Gets smaller as it goes out
+          scale: 0.00000001, // Gets smaller as it goes out
           ease: 'none',
           scrollTrigger: {
             trigger: intoTextRef.current,
@@ -115,12 +115,12 @@ export default function Home() {
         {
           x: '0vw',
           y: '0vh',
-          scale: 2.5 // Start bigger as it enters
+          scale: 2 // Start bigger as it enters
         },
         {
           x: '-80vw',
           y: '-175vh',
-          scale: 0.5, // Gets smaller as it goes out
+          scale: 0.00000001, // Gets smaller as it goes out
           ease: 'none',
           scrollTrigger: {
             trigger: betterTextRef.current,
@@ -140,12 +140,12 @@ export default function Home() {
         {
           x: '0vw',
           y: '0vh',
-          scale: 2.5 // Start bigger as it enters
+          scale: 2 // Start bigger as it enters
         },
         {
           x: '-80vw',
           y: '-175vh',
-          scale: 0.5, // Gets smaller as it goes out
+          scale: 0.00000001, // Gets smaller as it goes out
           ease: 'none',
           scrollTrigger: {
             trigger: healthTextRef.current,
