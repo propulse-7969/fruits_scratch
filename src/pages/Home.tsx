@@ -260,25 +260,67 @@ export default function Home() {
   // Theme carousel state and rotating rings
   const themes = [
     {
-      name: 'Lemon Lime',
-      subtitle: '12 cans - $35.99',
-      colors: ['#3F6B3C', '#2E5730', '#1E4122'], // outer→inner
-      canBg: '#2DBE4A',
-      emoji: '🥤',
-    },
-    {
-      name: 'Orange Zest',
-      subtitle: '12 cans - $34.99',
-      colors: ['#B85C1B', '#A24E13', '#7D3C0D'],
-      canBg: '#FF8C28',
+      name: 'Oranges',
+      subtitle: 'Refreshing and packed with Vitamin C',
+      colors: ['#E8A87C', '#D4A574', '#C19A6C'], // outer→inner - muted orange tones
+      canBg: '#D4A574',
       emoji: '🍊',
     },
     {
-      name: 'Berry Blast',
-      subtitle: '12 cans - $36.99',
-      colors: ['#5F2B6B', '#4A2054', '#34163B'],
-      canBg: '#B254E6',
-      emoji: '🫐',
+      name: 'Apples & Pears',
+      subtitle: 'Crisp and naturally sweet',
+      colors: ['#A8C09A', '#9BB88A', '#8EB07A'], // outer→inner - muted green tones
+      canBg: '#9BB88A',
+      emoji: '🍎',
+    },
+    {
+      name: 'Table Grapes',
+      subtitle: 'Naturally sweet and loaded with antioxidants',
+      colors: ['#B8A8C8', '#A898B8', '#9888A8'], // outer→inner - muted purple tones
+      canBg: '#A898B8',
+      emoji: '🍇',
+    },
+    {
+      name: 'Avocados',
+      subtitle: 'Creamy and full of healthy fats',
+      colors: ['#8A9A7A', '#7A8A6A', '#6A7A5A'], // outer→inner - muted earthy green tones
+      canBg: '#7A8A6A',
+      emoji: '🥑',
+    },
+    {
+      name: 'Peaches & Plums',
+      subtitle: 'Juicy and flavorful, perfect for summer',
+      colors: ['#E8B8C8', '#D8A8B8', '#C898A8'], // outer→inner - muted pink tones
+      canBg: '#D8A8B8',
+      emoji: '🍑',
+    },
+    {
+      name: 'Cherries',
+      subtitle: 'Tart and sweet, full of antioxidants',
+      colors: ['#C88A8A', '#B87A7A', '#A86A6A'], // outer→inner - muted red tones
+      canBg: '#B87A7A',
+      emoji: '🍒',
+    },
+    {
+      name: 'Pomegranates',
+      subtitle: 'Rich in juicy, nutrient-packed seeds',
+      colors: ['#A86A6A', '#985A5A', '#884A4A'], // outer→inner - muted burgundy tones
+      canBg: '#985A5A',
+      emoji: '🍎',
+    },
+    {
+      name: 'Lychees',
+      subtitle: 'Sweet, juicy, and tropical',
+      colors: ['#E8C8B8', '#D8B8A8', '#C8A898'], // outer→inner - muted coral tones
+      canBg: '#D8B8A8',
+      emoji: '🍒',
+    },
+    {
+      name: 'Strawberries',
+      subtitle: 'Sweet, vibrant, and perfect for any dish',
+      colors: ['#D88A8A', '#C87A7A', '#B86A6A'], // outer→inner - muted strawberry tones
+      canBg: '#C87A7A',
+      emoji: '🍓',
     },
   ] as const
 
@@ -308,9 +350,18 @@ export default function Home() {
 
   const applyTheme = (i: number) => {
     const theme = themes[i]
-    if (ringMidRef.current) gsap.to(ringMidRef.current, { backgroundColor: theme.colors[1], duration: 0.5 })
-    if (ringInnerRef.current) gsap.to(ringInnerRef.current, { backgroundColor: theme.colors[2], duration: 0.5 })
-    if (chooserBgRef.current) gsap.to(chooserBgRef.current, { backgroundColor: theme.colors[0], duration: 0.5 })
+    // Create a timeline to animate all elements simultaneously
+    const tl = gsap.timeline()
+    
+    if (ringMidRef.current) {
+      tl.to(ringMidRef.current, { backgroundColor: theme.colors[1], duration: 0.5 }, 0)
+    }
+    if (ringInnerRef.current) {
+      tl.to(ringInnerRef.current, { backgroundColor: theme.colors[2], duration: 0.5 }, 0)
+    }
+    if (chooserBgRef.current) {
+      tl.to(chooserBgRef.current, { backgroundColor: theme.colors[0], duration: 0.5 }, 0)
+    }
   }
 
   useEffect(() => {
@@ -349,7 +400,7 @@ export default function Home() {
          <div ref={ringInnerRef} className="ring inner octagon" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '87.75vmin', aspectRatio: '1 / 1', background: themes[0].colors[2], clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', zIndex: 2 }} />
         
         <div className="chooser-wrap" style={{ position: 'relative', width: 'min(1100px, 92vw)', margin: '0 auto', zIndex: 10, display: 'flex', flexDirection: 'column', flex: 1 }}>
-          <h2 className="flavors-heading" style={{ textAlign: 'center', margin: '1rem 0 0.75rem 0', color: '#fff', position: 'relative', zIndex: 15 }}>Choose Your Fruit</h2>
+          <h2 className="flavors-heading" style={{ textAlign: 'center', margin: '1rem 0 0.75rem 0', color: '#fff', position: 'relative', zIndex: 15, textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000' }}>Choose Your Fruit</h2>
           {/* Keep all text elements grouped at the top */}
           <div style={{ position: 'relative', zIndex: 15 }}>
             <FlavorCaption getTheme={() => themes[indexRef.current]} />
@@ -605,8 +656,21 @@ function FlavorCaption({ getTheme }: { getTheme: () => { name: string; subtitle:
   const { name, subtitle } = getTheme()
   return (
     <div style={{ textAlign: 'center', marginTop: '1.25rem' }}>
-      <div style={{ fontSize: '1.75rem', fontWeight: 700 }}>{name || '—'}</div>
-      <div style={{ opacity: 0.85 }}>{subtitle || ''}</div>
+      <div style={{ 
+        fontSize: '1.75rem', 
+        fontWeight: 700, 
+        fontFamily: '"Slackey", sans-serif',
+        color: '#fff',
+        textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000'
+      }}>{name || '—'}</div>
+      <div style={{ 
+        opacity: 0.85, 
+        fontFamily: "'Indie Flower', cursive",
+        color: '#fff',
+        fontSize: '1rem',
+        marginTop: '0.5rem',
+        textShadow: '0.5px 0.5px 0 #000, -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000'
+      }}>{subtitle || ''}</div>
     </div>
   )
 }
