@@ -12,11 +12,27 @@ export default function Home() {
   const intoTextRef = useRef<HTMLDivElement | null>(null)
   const betterTextRef = useRef<HTMLDivElement | null>(null)
   const healthTextRef = useRef<HTMLDivElement | null>(null)
+  const purpleSectionRef = useRef<HTMLElement | null>(null)
+  const greenSectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
-    const tween = gsap.to(document.documentElement, {
+    // Set initial background color to yellow
+    gsap.set(document.documentElement, { backgroundColor: '#fcde47' })
+
+    // Dummy transition to ensure page loads with yellow background
+    gsap.fromTo(document.documentElement, {
+      backgroundColor: '#fcde47'
+    }, {
+      backgroundColor: '#fcde47',
+      duration: 0.01,
+      ease: 'none'
+    })
+
+    const tween = gsap.fromTo(document.documentElement, {
+      backgroundColor: '#fcde47'
+    }, {
       backgroundColor: '#d9f99d',
       ease: 'none',
       scrollTrigger: {
@@ -157,6 +173,74 @@ export default function Home() {
       )
     }
 
+    // Background color transition from #d9f99d to blue when chooser section is scrolled
+    let chooserBgTransition: gsap.core.Tween | undefined
+    if (chooserBgRef.current) {
+      chooserBgTransition = gsap.fromTo(document.documentElement, {
+        backgroundColor: '#d9f99d'
+      }, {
+        backgroundColor: '#c0f0f5',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: chooserBgRef.current,
+          start: 'top bottom',
+          end: 'center center',
+          scrub: true,
+        },
+      })
+    }
+
+    // Background color transition from blue to yellow
+    let bgColorTransition: gsap.core.Tween | undefined
+    if (healthTextRef.current) {
+      bgColorTransition = gsap.fromTo(document.documentElement, {
+        backgroundColor: '#c0f0f5'
+      }, {
+        backgroundColor: '#fcde47',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: healthTextRef.current,
+          start: 'bottom 80%',
+          end: 'bottom 20%',
+          scrub: true,
+        },
+      })
+    }
+
+    // Background color transition from yellow to purple
+    let purpleBgTransition: gsap.core.Tween | undefined
+    if (purpleSectionRef.current) {
+      purpleBgTransition = gsap.fromTo(document.documentElement, {
+        backgroundColor: '#fcde47'
+      }, {
+        backgroundColor: '#e9cff6',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: purpleSectionRef.current,
+          start: 'top bottom',
+          end: 'center center',
+          scrub: true,
+        },
+      })
+    }
+
+    // Background color transition from purple to green
+    let greenBgTransition: gsap.core.Tween | undefined
+    if (greenSectionRef.current) {
+      greenBgTransition = gsap.fromTo(document.documentElement, {
+        backgroundColor: '#e9cff6'
+      }, {
+        backgroundColor: '#cbef9a',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: greenSectionRef.current,
+          start: 'top bottom',
+          end: 'center center',
+          scrub: true,
+        },
+      })
+    }
+
     return () => {
       tween.kill()
       fadeIn?.kill()
@@ -164,6 +248,10 @@ export default function Home() {
       intoAnimation?.kill()
       betterAnimation?.kill()
       healthAnimation?.kill()
+      chooserBgTransition?.kill()
+      bgColorTransition?.kill()
+      purpleBgTransition?.kill()
+      greenBgTransition?.kill()
       ScrollTrigger.getAll().forEach((st) => st.kill())
       document.documentElement.style.backgroundColor = '#fcde47'
     }
@@ -274,7 +362,7 @@ export default function Home() {
       </section>
 
       {/* New section below chooser */}
-      <section style={{ minHeight: '300vh', backgroundColor: '#c0f0f5', padding: '2rem 0', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ minHeight: '300vh', padding: '2rem 0', position: 'relative', overflow: 'hidden' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
           {/* Content for the new section can be added here */}
         </div>
@@ -342,6 +430,166 @@ export default function Home() {
         >
           HEALTH
         </div>
+      </section>
+
+      {/* Gut-Friendly Goodness content */}
+      <div style={{ 
+        maxWidth: '800px', 
+        textAlign: 'left',
+        color: '#08304a',
+        margin: '0',
+        padding: '4rem 1rem 4rem 6rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        minHeight: '100vh'
+      }}>
+        <div style={{ width: '100%' }}>
+          <h2 style={{ 
+            fontSize: '3rem', 
+            fontWeight: 'bold', 
+            marginBottom: '1.5rem',
+            color: '#08304a',
+            fontFamily: '"Slackey", sans-serif',
+            lineHeight: '1.05'
+          }}>
+            Gut-Friendly Goodness
+          </h2>
+          <p style={{ 
+            fontSize: '1.25rem', 
+            lineHeight: '1.6', 
+            marginBottom: '2rem',
+            maxWidth: '640px',
+            color: '#08304a',
+            fontFamily: "'Indie Flower', cursive",
+            letterSpacing: '0.01em',
+            fontWeight: '700'
+          }}>
+            Our fruits are packed with natural fibers and essential nutrients, offering your gut the love it deserves. Say goodbye to bloating and hello to a happy, healthy digestive system with every bite. From refreshing oranges to sweet strawberries, our fruit mix is designed to keep your gut in check and your taste buds delighted!
+          </p>
+        </div>
+      </div>
+
+      {/* New section with purple background transition */}
+      <section ref={purpleSectionRef} style={{ 
+        minHeight: '100vh', 
+        padding: '4rem 2rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+      }}>
+        <div style={{ 
+          maxWidth: '800px', 
+          textAlign: 'left',
+          color: '#08304a',
+          margin: '0',
+          padding: '4rem 6rem 4rem 0'
+        }}>
+          <h2 style={{ 
+            fontSize: '3rem', 
+            fontWeight: 'bold', 
+            marginBottom: '1.5rem',
+            color: '#08304a',
+            fontFamily: '"Slackey", sans-serif',
+            lineHeight: '1.05'
+          }}>
+            Light Calories, Big Flavor
+          </h2>
+          <p style={{ 
+            fontSize: '1.25rem', 
+            lineHeight: '1.6', 
+            marginBottom: '2rem',
+            maxWidth: '640px',
+            color: '#08304a',
+            fontFamily: "'Indie Flower', cursive",
+            letterSpacing: '0.01em',
+            fontWeight: '700'
+          }}>
+            Indulge in the refreshing taste of our fruits without the guilt. Packed with natural sweetness and just the right amount of nutrients, our fruit blend gives you all the flavor you crave, with none of the compromise. Enjoy all the goodness, with light calories and a big burst of natural flavor!
+          </p>
+        </div>
+      </section>
+
+      {/* New section with green background transition */}
+      <section ref={greenSectionRef} style={{ 
+        minHeight: '100vh', 
+        padding: '4rem 2rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+      }}>
+        <div style={{ 
+          maxWidth: '800px', 
+          textAlign: 'left',
+          color: '#08304a',
+          margin: '0',
+          padding: '4rem 0 4rem 6rem'
+        }}>
+          <h2 style={{ 
+            fontSize: '3rem', 
+            fontWeight: 'bold', 
+            marginBottom: '1.5rem',
+            color: '#08304a',
+            fontFamily: '"Slackey", sans-serif',
+            lineHeight: '1.05'
+          }}>
+            Naturally Refreshing
+          </h2>
+          <p style={{ 
+            fontSize: '1.25rem', 
+            lineHeight: '1.6', 
+            marginBottom: '2rem',
+            maxWidth: '640px',
+            color: '#08304a',
+            fontFamily: "'Indie Flower', cursive",
+            letterSpacing: '0.01em',
+            fontWeight: '700'
+          }}>
+            Our fruits are made with only the freshest, natural ingredients, delivering a crisp, clean taste that's as refreshing as it is delicious. Free from artificial sweeteners and flavors, each bite gives you a natural boost of refreshment. Enjoy the vibrant, pure taste of nature's best, packed into one perfect blend!
+          </p>
+        </div>
+      </section>
+
+      {/* Final section with "The Fruit That Brings a Smile" */}
+      <section style={{ 
+        minHeight: '100vh', 
+        padding: '2rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fe6334',
+        position: 'relative'
+      }}>
+        <div style={{ 
+          width: '100%',
+          textAlign: 'center',
+          color: '#08304a',
+          margin: '0',
+          padding: '2rem'
+        }}>
+          <div style={{ 
+            fontWeight: 'bold', 
+            color: '#fee832',
+            fontFamily: '"Slackey", sans-serif',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '80vh'
+          }}>
+            <div style={{ fontSize: '30rem', lineHeight: '0.7', marginBottom: '3rem' }}>FRUIT</div>
+            <div style={{ fontSize: '8rem', lineHeight: '1.2', margin: '3rem 0' }}>THAT BRINGS A</div>
+            <div style={{ fontSize: '30rem', lineHeight: '0.7' }}>SMILE</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Yellow card section */}
+      <section style={{ 
+        minHeight: '15vh', 
+        backgroundColor: '#fee832'
+      }}>
       </section>
     </main>
   )
