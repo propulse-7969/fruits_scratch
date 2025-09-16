@@ -655,20 +655,12 @@ export default function Home() {
           margin: '0',
           padding: '2rem'
         }}>
-          <div style={{ 
-            fontWeight: 'bold', 
-            color: '#fee832',
-            fontFamily: '"Slackey", sans-serif',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '80vh'
-          }}>
-            <div style={{ fontSize: '30rem', lineHeight: '0.7', marginBottom: '3rem' }}>FRUIT</div>
-            <div style={{ fontSize: '8rem', lineHeight: '1.2', margin: '3rem 0' }}>THAT BRINGS A</div>
-            <div style={{ fontSize: '30rem', lineHeight: '0.7' }}>SMILE</div>
+          <div className="final-message">
+            <div className="final-text-large">FRUIT</div>
+            <div className="final-text-small">THAT</div>
+            <div className="final-text-small">BRINGS</div>
+            <div className="final-text-small">A</div>
+            <div className="final-text-large">SMILE</div>
           </div>
         </div>
       </section>
