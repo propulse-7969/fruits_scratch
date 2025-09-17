@@ -521,7 +521,7 @@ export default function Home() {
       </section>
 
       {/* Gut-Friendly Goodness content */}
-      <div style={{ 
+      <div className="gut-friendly-section" style={{ 
         maxWidth: '800px', 
         textAlign: 'left',
         color: '#08304a',
@@ -559,7 +559,7 @@ export default function Home() {
       </div>
 
       {/* New section with purple background transition */}
-      <section ref={purpleSectionRef} style={{ 
+      <section ref={purpleSectionRef} className="light-calories-section" style={{ 
         minHeight: '100vh', 
         padding: '4rem 2rem',
         display: 'flex',
@@ -599,7 +599,7 @@ export default function Home() {
       </section>
 
       {/* New section with green background transition */}
-      <section ref={greenSectionRef} style={{ 
+      <section ref={greenSectionRef} className="naturally-refreshing-section" style={{ 
         minHeight: '100vh', 
         padding: '4rem 2rem',
         display: 'flex',

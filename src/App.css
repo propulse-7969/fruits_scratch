@@ -112,8 +112,8 @@
 
 /* Mobile Menu Button */
 .mobile-menu-button {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(8, 48, 74, 0.9);
+  border: 2px solid rgba(8, 48, 74, 0.9);
   padding: 12px;
   cursor: pointer;
   border-radius: 12px;
@@ -126,7 +126,8 @@
 }
 
 .mobile-menu-button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(8, 48, 74, 1);
+  border: 2px solid rgba(8, 48, 74, 1);
   transform: scale(1.05);
 }
 
@@ -141,7 +142,7 @@
 .dot {
   width: 6px;
   height: 6px;
-  background-color: #08304a;
+  background-color: white;
   border-radius: 50%;
   transition: all 0.2s ease;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -225,7 +226,7 @@
   font-weight: 600;
 }
 
-/* Mobile Navigation - Show hamburger menu in top-left */
+/* Mobile Navigation - Show hamburger menu in top-right */
 @media (max-width: 768px) {
   .navbar {
     /* Remove all background styling */
@@ -236,10 +237,11 @@
     box-shadow: none !important;
     border-radius: 0 !important;
     
-    /* Position in top-left */
+    /* Position in top-right */
     width: auto !important;
     max-width: none !important;
-    left: 20px !important;
+    right: 20px !important;
+    left: auto !important;
     top: 20px !important;
     transform: none !important;
     height: auto !important;
@@ -266,7 +268,7 @@
   }
   
   .mobile-menu-button {
-    background: rgba(8, 48, 74, 0.8) !important;
+    background: rgba(8, 48, 74, 0.9) !important;
     border: 2px solid rgba(8, 48, 74, 0.9) !important;
     min-width: 50px !important;
     min-height: 50px !important;
@@ -281,7 +283,8 @@
 
 @media (max-width: 600px) {
   .navbar {
-    left: 15px !important;
+    right: 15px !important;
+    left: auto !important;
     top: 15px !important;
   }
   
@@ -293,7 +296,8 @@
 
 @media (max-width: 480px) {
   .navbar {
-    left: 12px !important;
+    right: 12px !important;
+    left: auto !important;
     top: 12px !important;
   }
   
@@ -310,7 +314,8 @@
 
 @media (max-width: 360px) {
   .navbar {
-    left: 10px !important;
+    right: 10px !important;
+    left: auto !important;
     top: 10px !important;
   }
   
@@ -408,17 +413,32 @@
   .home-title {
     font-size: clamp(35px, 10vw, 90px) !important;
   }
+  
+  /* Make main HELLO text bigger on mobile */
+  .home-hero .home-title {
+    font-size: clamp(60px, 18vw, 140px) !important;
+  }
 }
 
 @media (max-width: 480px) {
   .home-title {
     font-size: clamp(25px, 8vw, 70px) !important;
   }
+  
+  /* Make main HELLO text bigger on small mobile */
+  .home-hero .home-title {
+    font-size: clamp(50px, 16vw, 120px) !important;
+  }
 }
 
 @media (max-width: 360px) {
   .home-title {
     font-size: clamp(20px, 6vw, 55px) !important;
+  }
+  
+  /* Make main HELLO text bigger on extra small mobile */
+  .home-hero .home-title {
+    font-size: clamp(45px, 14vw, 100px) !important;
   }
 }
 
@@ -485,13 +505,13 @@
 }
 
 .final-text-large {
-  font-size: clamp(8rem, 20vw, 30rem);
+  font-size: clamp(8rem, 20vw, 20rem);
   line-height: 0.8;
   font-weight: bold;
 }
 
 .final-text-small {
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(3rem, 8vw, 6rem);
   line-height: 1;
   font-weight: bold;
 }
@@ -505,12 +525,12 @@
   }
   
   .final-text-large {
-    font-size: clamp(5rem, 18vw, 10rem);
+    font-size: clamp(7.5rem, 26vw, 15rem);
     line-height: 0.9;
   }
   
   .final-text-small {
-    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-size: clamp(3.5rem, 11vw, 7.5rem);
     line-height: 1;
   }
 }
@@ -523,12 +543,12 @@
   }
   
   .final-text-large {
-    font-size: clamp(4rem, 16vw, 8rem);
+    font-size: clamp(6.5rem, 24vw, 13rem);
     line-height: 0.9;
   }
   
   .final-text-small {
-    font-size: clamp(2rem, 6vw, 4rem);
+    font-size: clamp(3rem, 10vw, 6.5rem);
     line-height: 1;
   }
 }
@@ -541,13 +561,71 @@
   }
   
   .final-text-large {
-    font-size: clamp(3.5rem, 14vw, 7rem);
+    font-size: clamp(4rem, 16vw, 8rem);
     line-height: 0.95;
   }
   
   .final-text-small {
-    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 6vw, 4rem);
     line-height: 1;
+  }
+}
+
+/* Mobile centering for content sections */
+@media (max-width: 768px) {
+  .gut-friendly-section {
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 4rem 2rem !important;
+  }
+  
+  .gut-friendly-section div {
+    text-align: center !important;
+  }
+  
+  .gut-friendly-section h2 {
+    text-align: center !important;
+  }
+  
+  .gut-friendly-section p {
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+  
+  .light-calories-section {
+    justify-content: center !important;
+  }
+  
+  .light-calories-section div {
+    text-align: center !important;
+    padding: 4rem 2rem !important;
+  }
+  
+  .light-calories-section h2 {
+    text-align: center !important;
+  }
+  
+  .light-calories-section p {
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+  
+  .naturally-refreshing-section {
+    justify-content: center !important;
+  }
+  
+  .naturally-refreshing-section div {
+    text-align: center !important;
+    padding: 4rem 2rem !important;
+  }
+  
+  .naturally-refreshing-section h2 {
+    text-align: center !important;
+  }
+  
+  .naturally-refreshing-section p {
+    text-align: center !important;
+    margin: 0 auto !important;
   }
 }
 

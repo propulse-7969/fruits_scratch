@@ -55,36 +55,11 @@ export default function Navbar() {
             className="mobile-menu-button"
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
-            style={{
-              background: 'rgba(8, 48, 74, 0.9)',
-              border: '2px solid white',
-              minWidth: '50px',
-              minHeight: '50px',
-              borderRadius: '12px'
-            }}
           >
             <div className="hamburger-dots">
-              <span className="dot" style={{ 
-                background: 'white', 
-                width: '8px', 
-                height: '8px',
-                display: 'block',
-                borderRadius: '50%'
-              }}></span>
-              <span className="dot" style={{ 
-                background: 'white', 
-                width: '8px', 
-                height: '8px',
-                display: 'block',
-                borderRadius: '50%'
-              }}></span>
-              <span className="dot" style={{ 
-                background: 'white', 
-                width: '8px', 
-                height: '8px',
-                display: 'block',
-                borderRadius: '50%'
-              }}></span>
+              <span className="dot"></span>
+              <span className="dot"></span>
+              <span className="dot"></span>
             </div>
           </button>
 
