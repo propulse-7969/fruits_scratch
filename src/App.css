@@ -1,3 +1,10 @@
+/* Font system variables */
+:root {
+  --font-primary: "Anton", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+  --font-tertiary: "Quicksand", sans-serif;
+}
+
 /* Layout containers */
 #app-root {
   position: relative;
@@ -72,7 +79,7 @@
   white-space: nowrap;
   
   /* Text styling */
-  font-family: "Slackey", sans-serif;
+  font-family: var(--font-secondary);
   letter-spacing: 0.01em;
 }
 
@@ -211,7 +218,7 @@
   font-size: 18px;
   border-radius: 12px;
   transition: all 0.2s ease;
-  font-family: "Slackey", sans-serif;
+  font-family: var(--font-secondary);
   text-align: center;
   white-space: nowrap;
 }
@@ -386,14 +393,14 @@
   line-height: 1.05;
   color: #08304a;
   margin: 0 0 16px;
-  font-family: "Slackey", sans-serif;
+  font-family: var(--font-secondary);
 }
 
 .flavors-copy {
   color: #08304a;
   font-size: clamp(16px, 2.6vw, 22px);
   max-width: 640px;
-  font-family: 'Indie Flower', cursive;
+  font-family: var(--font-tertiary);
   letter-spacing: 0.01em;
   font-weight: 700;
   text-align: left;
@@ -405,7 +412,7 @@
   letter-spacing: 0.02em;
   margin: 0;
   text-align: center;
-  font-family: "Fascinate Inline", system-ui;
+  font-family: var(--font-primary);
 }
 
 /* Mobile adjustments for home-title (DIVE INTO BETTER HEALTH text) */
@@ -448,7 +455,7 @@
   font-size: clamp(22px, 4.5vw, 48px);
   font-weight: 800;
   color: #08304a;
-  font-family: "Slackey", sans-serif;
+  font-family: var(--font-secondary);
   letter-spacing: 0.03em;
 }
 
@@ -458,7 +465,7 @@
   font-size: clamp(16px, 2.6vw, 24px);
   color: #08304a;
   max-width: 800px;
-  font-family: 'Indie Flower', cursive;
+  font-family: var(--font-tertiary);
   letter-spacing: 0.01em;
   font-weight: 700;
 }
@@ -494,7 +501,7 @@
 .final-message {
   font-weight: bold;
   color: #fee832;
-  font-family: "Slackey", sans-serif;
+  font-family: var(--font-secondary);
   text-align: center;
   display: flex;
   flex-direction: column;
