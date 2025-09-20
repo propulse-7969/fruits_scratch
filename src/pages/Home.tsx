@@ -551,8 +551,7 @@ export default function Home() {
             maxWidth: '640px',
             color: '#08304a',
             fontFamily: fonts.tertiary,
-            letterSpacing: '0.01em',
-            fontWeight: '700'
+            letterSpacing: '0.01em'
           }}>
             Our fruits are packed with natural fibers and essential nutrients, offering your gut the love it deserves. Say goodbye to bloating and hello to a happy, healthy digestive system with every bite. From refreshing oranges to sweet strawberries, our fruit mix is designed to keep your gut in check and your taste buds delighted!
           </p>
@@ -591,8 +590,7 @@ export default function Home() {
             maxWidth: '640px',
             color: '#08304a',
             fontFamily: fonts.tertiary,
-            letterSpacing: '0.01em',
-            fontWeight: '700'
+            letterSpacing: '0.01em'
           }}>
             Indulge in the refreshing taste of our fruits without the guilt. Packed with natural sweetness and just the right amount of nutrients, our fruit blend gives you all the flavor you crave, with none of the compromise. Enjoy all the goodness, with light calories and a big burst of natural flavor!
           </p>
@@ -631,8 +629,7 @@ export default function Home() {
             maxWidth: '640px',
             color: '#08304a',
             fontFamily: fonts.tertiary,
-            letterSpacing: '0.01em',
-            fontWeight: '700'
+            letterSpacing: '0.01em'
           }}>
             Our fruits are made with only the freshest, natural ingredients, delivering a crisp, clean taste that's as refreshing as it is delicious. Free from artificial sweeteners and flavors, each bite gives you a natural boost of refreshment. Enjoy the vibrant, pure taste of nature's best, packed into one perfect blend!
           </p>

@@ -3,6 +3,7 @@
   --font-primary: "Anton", sans-serif;
   --font-secondary: "Poppins", sans-serif;
   --font-tertiary: "Quicksand", sans-serif;
+  --font-tertiary-weight: 400;
 }
 
 /* Layout containers */
@@ -398,11 +399,13 @@
 
 .flavors-copy {
   color: #08304a;
-  font-size: clamp(16px, 2.6vw, 22px);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
   max-width: 640px;
   font-family: var(--font-tertiary);
+  font-weight: var(--font-tertiary-weight);
   letter-spacing: 0.01em;
-  font-weight: 700;
   text-align: left;
 }
 
@@ -462,12 +465,14 @@
 .home-desc {
   margin: 8px auto 0;
   text-align: center;
-  font-size: clamp(16px, 2.6vw, 24px);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
   color: #08304a;
   max-width: 800px;
   font-family: var(--font-tertiary);
+  font-weight: var(--font-tertiary-weight);
   letter-spacing: 0.01em;
-  font-weight: 700;
 }
 
 /* Octagon styling for fruit chooser */
@@ -568,18 +573,35 @@
   }
   
   .final-text-large {
-    font-size: clamp(4rem, 16vw, 8rem);
+    font-size: clamp(6rem, 24vw, 12rem);
     line-height: 0.95;
   }
   
   .final-text-small {
-    font-size: clamp(2rem, 6vw, 4rem);
+    font-size: clamp(3rem, 10vw, 6rem);
     line-height: 1;
   }
 }
 
 /* Mobile centering for content sections */
 @media (max-width: 768px) {
+  .home-desc {
+    padding: 0 2rem !important;
+  }
+  
+  .flavors-container {
+    text-align: center !important;
+  }
+  
+  .flavors-heading {
+    text-align: center !important;
+  }
+  
+  .flavors-copy {
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+  
   .gut-friendly-section {
     text-align: center !important;
     justify-content: center !important;

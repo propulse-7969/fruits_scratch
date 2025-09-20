@@ -282,7 +282,6 @@ export default function Products() {
             color: '#08304a',
             fontFamily: fonts.tertiary,
             fontSize: '1.2rem',
-            fontWeight: '600',
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
