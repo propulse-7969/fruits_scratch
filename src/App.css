@@ -17,17 +17,17 @@
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 800px;
+  width: calc(100% - 16px);
+  max-width: 1120px;
   height: 60px;
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
-  /* Glassy effect */
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Brownish translucent backdrop for contrast */
+  background: rgba(89, 59, 9, 0.55); /* #593b09 */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(89, 59, 9, 0.65);
   border-radius: 30px;
   
   /* Subtle shadow */
@@ -38,10 +38,10 @@
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(89, 59, 9, 0.68);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(89, 59, 9, 0.75);
   box-shadow: 
     0 12px 40px rgba(0, 0, 0, 0.15),
     0 6px 20px rgba(0, 0, 0, 0.08),
@@ -66,11 +66,18 @@
   align-items: center;
 }
 
+/* Spread desktop links to use the navbar width */
+.navbar-links.desktop-nav {
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 36px;
+}
+
 .navbar-link {
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
-  color: #08304a;
+  color: #d6e534;
   text-decoration: none;
   font-weight: 500;
   font-size: 18px;
@@ -86,7 +93,7 @@
 
 .navbar-link:hover {
   background: rgba(255, 255, 255, 0.2);
-  color: #08304a;
+  color: #d6e534;
   transform: translateY(-1px);
   box-shadow: 
     0 4px 12px rgba(0, 0, 0, 0.1),
@@ -95,7 +102,7 @@
 
 .navbar-link.active {
   background: rgba(255, 255, 255, 0.3);
-  color: #08304a;
+  color: #d6e534;
   font-weight: 600;
   box-shadow: 
     0 4px 16px rgba(0, 0, 0, 0.12),
@@ -105,7 +112,7 @@
 
 .navbar-link.active:hover {
   background: rgba(255, 255, 255, 0.35);
-  color: #08304a;
+  color: #d6e534;
   transform: translateY(-1px);
 }
 
@@ -213,7 +220,7 @@
 .mobile-menu-link {
   display: block;
   padding: 12px 20px;
-  color: #08304a;
+  color: #d6e534;
   text-decoration: none;
   font-weight: 500;
   font-size: 18px;
@@ -375,6 +382,26 @@
   display: grid;
   place-items: center;
 }
+.hero-fruit {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 30px rgba(0,0,0,0.35));
+  user-select: none;
+}
+.hero-fruit-left {
+  left: -15vw;
+  width: min(780px, 72vmin);
+  transform: translateY(-50%);
+}
+.hero-fruit-right {
+  right: -15vw;
+  width: min(840px, 78vmin);
+  transform: translateY(-50%);
+}
+.home-hero { z-index: 2; position: relative; }
 .flavors-section {
   min-height: 100vh;
   display: flex;
@@ -392,13 +419,13 @@
 .flavors-heading {
   font-size: clamp(32px, 6vw, 72px);
   line-height: 1.05;
-  color: #08304a;
+  color: #b0bd22;
   margin: 0 0 16px;
   font-family: var(--font-secondary);
 }
 
 .flavors-copy {
-  color: #08304a;
+  color: #a1c171;
   font-size: 1.25rem;
   line-height: 1.6;
   margin-bottom: 2rem;
@@ -410,7 +437,7 @@
 }
 
 .home-title {
-  color: #f97316;
+  color: #d6e534;
   font-size: clamp(56px, 14vw, 160px);
   letter-spacing: 0.02em;
   margin: 0;
@@ -457,7 +484,7 @@
   text-align: center;
   font-size: clamp(22px, 4.5vw, 48px);
   font-weight: 800;
-  color: #08304a;
+  color: #b0bd22;
   font-family: var(--font-secondary);
   letter-spacing: 0.03em;
 }
@@ -468,7 +495,7 @@
   font-size: 1.25rem;
   line-height: 1.6;
   margin-bottom: 2rem;
-  color: #08304a;
+  color: #a1c171;
   max-width: 800px;
   font-family: var(--font-tertiary);
   font-weight: var(--font-tertiary-weight);
@@ -656,5 +683,21 @@
     text-align: center !important;
     margin: 0 auto !important;
   }
+}
+
+/* Shared blank page styling aligned with Home palette */
+.page-blank {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+}
+
+.page-blank h2 {
+  margin: 0;
+  color: #d6e534;
+  font-family: var(--font-secondary);
+  letter-spacing: 0.01em;
 }
 

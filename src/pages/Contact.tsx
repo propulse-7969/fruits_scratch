@@ -1,7 +1,7 @@
 export default function Contact() {
   return (
     <main className="page-blank">
-      <h2>Contact Us</h2>
+      <h2>Under Construction :)</h2>
     </main>
   )
 }
