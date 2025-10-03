@@ -679,10 +679,10 @@ export default function Home() {
         <div ref={chooserBgRef} style={{ position: 'absolute', inset: '-1px', background: CHOOSER_OUTER, zIndex: 0 }} />
         
          {/* Octagons positioned to fill entire section */}
-         <div ref={ringMidRef} className="ring mid octagon" style={{ position: 'absolute', top: '56%', left: '50%', transform: 'translate(-50%, -50%)', width: '128.7vmin', aspectRatio: '1 / 1', background: CHOOSER_MID, filter: 'drop-shadow(0 6px 40px rgba(0,0,0,0.25))', clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', zIndex: 1 }} />
-         <div ref={ringInnerRef} className="ring inner octagon" style={{ position: 'absolute', top: '56%', left: '50%', transform: 'translate(-50%, -50%)', width: '87.75vmin', aspectRatio: '1 / 1', background: CHOOSER_INNER, clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', zIndex: 2 }} />
+        <div ref={ringMidRef} className="ring mid octagon" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '128.7vmin', aspectRatio: '1 / 1', background: CHOOSER_MID, filter: 'drop-shadow(0 6px 40px rgba(0,0,0,0.25))', clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', zIndex: 1 }} />
+        <div ref={ringInnerRef} className="ring inner octagon" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '87.75vmin', aspectRatio: '1 / 1', background: CHOOSER_INNER, clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', zIndex: 2 }} />
          {/* Clipped rotating holder */}
-         <div ref={ringInnerContentRef} style={{ position: 'absolute', top: '56%', left: '50%', transform: 'translate(-50%, -50%)', width: '87.75vmin', aspectRatio: '1 / 1', clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', overflow: 'hidden', zIndex: 3, pointerEvents: 'none' }}>
+        <div ref={ringInnerContentRef} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '87.75vmin', aspectRatio: '1 / 1', clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', overflow: 'hidden', zIndex: 3, pointerEvents: 'none' }}>
            {/* Neutral layer counter-rotates so fruit stays upright */}
            <div ref={ringInnerContentNeutralRef} style={{ position: 'absolute', inset: 0 }}>
              {fruitImagesOrdered.map((src, i) => (
@@ -719,7 +719,7 @@ export default function Home() {
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(-50%) scale(1)'
           }}
-          style={{ position: 'absolute', left: '12%', top: '56%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', zIndex: 20, outline: 'none' }}
+          style={{ position: 'absolute', left: '12%', top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', zIndex: 20, outline: 'none' }}
         >
           <img src={leftArrow} alt="Previous" style={{ width: '155px', height: '155px', filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.35))' }} />
         </button>
@@ -736,7 +736,7 @@ export default function Home() {
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(-50%) scale(1)'
           }}
-          style={{ position: 'absolute', right: '12%', top: '56%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', zIndex: 20, outline: 'none' }}
+          style={{ position: 'absolute', right: '12%', top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', zIndex: 20, outline: 'none' }}
         >
           <img src={rightArrow} alt="Next" style={{ width: '155px', height: '155px', filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.35))' }} />
         </button>

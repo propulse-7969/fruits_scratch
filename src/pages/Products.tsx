@@ -16,17 +16,17 @@ export default function Products() {
     }
   }, [])
 
-  // Product categories with emojis
+  // Product categories
   const productCategories = [
-    { name: 'Oranges', emoji: '🍊' },
-    { name: 'Apples & Pears', emoji: '🍎' },
-    { name: 'Table Grapes', emoji: '🍇' },
-    { name: 'Avocados', emoji: '🥑' },
-    { name: 'Peaches & Plums', emoji: '🍑' },
-    { name: 'Cherries', emoji: '🍒' },
-    { name: 'Pomegranates', emoji: '🍎' },
-    { name: 'Lychees', emoji: '🍒' },
-    { name: 'Strawberries', emoji: '🍓' }
+    { name: 'Oranges' },
+    { name: 'Apples & Pears' },
+    { name: 'Table Grapes' },
+    { name: 'Avocados' },
+    { name: 'Peaches & Plums' },
+    { name: 'Cherries' },
+    { name: 'Pomegranates' },
+    { name: 'Lychees' },
+    { name: 'Strawberries' }
   ]
 
   return (
@@ -98,7 +98,6 @@ export default function Products() {
                   }
                 }}
               >
-                <span style={{ fontSize: '1.2rem' }}>{category.emoji}</span>
                 <span>{category.name}</span>
               </div>
             ))}
