@@ -595,7 +595,6 @@ export default function Home() {
   useEffect(() => {
     applyTheme(indexRef.current)
     // Initialize chooser images positions (only current is visible)
-    const total = fruitImagesOrdered.length
     chooserImgRefs.current.forEach((img, i) => {
       if (!img) return
       gsap.set(img, { xPercent: i === indexRef.current ? 0 : 120, autoAlpha: i === indexRef.current ? 1 : 0 })
