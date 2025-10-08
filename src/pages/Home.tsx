@@ -610,7 +610,7 @@ export default function Home() {
     // Initialize chooser images positions (only current is visible)
     chooserImgRefs.current.forEach((img, i) => {
       if (!img) return
-      gsap.set(img, { xPercent: i === indexRef.current ? -50 : 70, autoAlpha: i === indexRef.current ? 1 : 0 })
+      gsap.set(img, { xPercent: i === indexRef.current ? 0 : 120, autoAlpha: i === indexRef.current ? 1 : 0 })
     })
     
     // Add natural bouncy floating animation to all chooser fruit images
@@ -639,8 +639,8 @@ export default function Home() {
     if (currentImg && nextImg) {
       const toLeft = dir === 1
       gsap.timeline()
-        .to(currentImg, { xPercent: toLeft ? -170 : 70, autoAlpha: 0, duration: 0.5, ease: 'power3.inOut' }, 0)
-        .fromTo(nextImg, { xPercent: toLeft ? 70 : -170, autoAlpha: 0 }, { xPercent: -50, autoAlpha: 1, duration: 0.6, ease: 'power3.inOut' }, 0)
+        .to(currentImg, { xPercent: toLeft ? -120 : 120, autoAlpha: 0, duration: 0.5, ease: 'power3.inOut' }, 0)
+        .fromTo(nextImg, { xPercent: toLeft ? 120 : -120, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.inOut' }, 0)
     }
   }
 
