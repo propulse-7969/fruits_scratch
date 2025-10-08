@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { fonts } from '../fonts'
@@ -36,6 +36,19 @@ export default function Home() {
   const purpleSectionRef = useRef<HTMLElement | null>(null)
   const greenSectionRef = useRef<HTMLElement | null>(null)
   const finalSectionRef = useRef<HTMLElement | null>(null)
+
+  // Ensure hero fruits are positioned correctly on initial load
+  useLayoutEffect(() => {
+    if (leftFruitRef.current) {
+      gsap.set(leftFruitRef.current, { yPercent: -50 })
+    }
+    if (rightFruitRef.current) {
+      gsap.set(rightFruitRef.current, { yPercent: -50 })
+    }
+    if (appleRef.current) {
+      gsap.set(appleRef.current, { yPercent: -50 })
+    }
+  }, [])
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -594,12 +607,6 @@ export default function Home() {
 
   useEffect(() => {
     applyTheme(indexRef.current)
-    // Ensure all chooser images are perfectly centered
-    chooserImgRefs.current.forEach((img) => {
-      if (!img) return
-      gsap.set(img, { xPercent: -50, yPercent: -50 })
-    })
-    
     // Initialize chooser images positions (only current is visible)
     chooserImgRefs.current.forEach((img, i) => {
       if (!img) return
