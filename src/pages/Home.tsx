@@ -613,11 +613,11 @@ export default function Home() {
       gsap.set(img, { xPercent: i === indexRef.current ? 0 : 120, autoAlpha: i === indexRef.current ? 1 : 0 })
     })
     
-    // Add natural bouncy floating animation to all chooser fruit images
+    // Add subtle floating animation to all chooser fruit images
     chooserImgRefs.current.forEach((img, i) => {
       if (!img) return
       gsap.to(img, {
-        yPercent: -51.2, // slightly increased amplitude (~1.2px movement)
+        yPercent: -5, // reduced amplitude (~0.8px movement)
         duration: 0.8 + (i * 0.08), // faster frequency for more natural bounce
         ease: 'sine.inOut',
         yoyo: true,
