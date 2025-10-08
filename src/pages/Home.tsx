@@ -594,18 +594,24 @@ export default function Home() {
 
   useEffect(() => {
     applyTheme(indexRef.current)
+    // Ensure all chooser images are perfectly centered
+    chooserImgRefs.current.forEach((img) => {
+      if (!img) return
+      gsap.set(img, { xPercent: -50, yPercent: -50 })
+    })
+    
     // Initialize chooser images positions (only current is visible)
     chooserImgRefs.current.forEach((img, i) => {
       if (!img) return
-      gsap.set(img, { xPercent: i === indexRef.current ? 0 : 120, autoAlpha: i === indexRef.current ? 1 : 0 })
+      gsap.set(img, { xPercent: i === indexRef.current ? -50 : 70, autoAlpha: i === indexRef.current ? 1 : 0 })
     })
     
-    // Add subtle floating animation to all chooser fruit images
+    // Add natural bouncy floating animation to all chooser fruit images
     chooserImgRefs.current.forEach((img, i) => {
       if (!img) return
       gsap.to(img, {
-        yPercent: -2, // very small amplitude (~<2px for most sizes)
-        duration: 0.9 + (i * 0.08),
+        yPercent: -51.2, // slightly increased amplitude (~1.2px movement)
+        duration: 0.8 + (i * 0.08), // faster frequency for more natural bounce
         ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
@@ -626,8 +632,8 @@ export default function Home() {
     if (currentImg && nextImg) {
       const toLeft = dir === 1
       gsap.timeline()
-        .to(currentImg, { xPercent: toLeft ? -120 : 120, autoAlpha: 0, duration: 0.5, ease: 'power3.inOut' }, 0)
-        .fromTo(nextImg, { xPercent: toLeft ? 120 : -120, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.inOut' }, 0)
+        .to(currentImg, { xPercent: toLeft ? -170 : 70, autoAlpha: 0, duration: 0.5, ease: 'power3.inOut' }, 0)
+        .fromTo(nextImg, { xPercent: toLeft ? 70 : -170, autoAlpha: 0 }, { xPercent: -50, autoAlpha: 1, duration: 0.6, ease: 'power3.inOut' }, 0)
     }
   }
 

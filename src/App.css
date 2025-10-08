@@ -394,12 +394,14 @@
 .hero-fruit-left {
   left: -15vw;
   width: min(780px, 72vmin);
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(2);
+  transform-origin: center center;
 }
 .hero-fruit-right {
   right: -15vw;
   width: min(840px, 78vmin);
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(1.5);
+  transform-origin: center center;
 }
 .home-hero { z-index: 2; position: relative; }
 .flavors-section {
