@@ -606,26 +606,99 @@ export default function Home() {
   }
 
   useEffect(() => {
-    applyTheme(indexRef.current)
-    // Initialize chooser images positions (only current is visible)
-    chooserImgRefs.current.forEach((img, i) => {
-      if (!img) return
-      gsap.set(img, { xPercent: i === indexRef.current ? 0 : 120, autoAlpha: i === indexRef.current ? 1 : 0 })
-    })
-    
-    // Add subtle floating animation to all chooser fruit images
-    chooserImgRefs.current.forEach((img, i) => {
-      if (!img) return
-      gsap.to(img, {
-        yPercent: -5, // reduced amplitude (~0.8px movement)
-        duration: 0.8 + (i * 0.08), // faster frequency for more natural bounce
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-        delay: i * 0.12,
-        force3D: true
+    const initializeChooser = () => {
+      // Wait for DOM to be fully ready
+      requestAnimationFrame(() => {
+        applyTheme(indexRef.current)
+        
+        // Force a reflow to ensure all elements are positioned
+        if (ringInnerContentRef.current) {
+          ringInnerContentRef.current.offsetHeight
+        }
+        
+        // Debug logging for browser profile differences
+        console.log('Chooser initialization:', {
+          userAgent: navigator.userAgent,
+          viewport: { width: window.innerWidth, height: window.innerHeight },
+          devicePixelRatio: window.devicePixelRatio,
+          ringInnerContent: ringInnerContentRef.current?.getBoundingClientRect(),
+          imagesLoaded: chooserImgRefs.current.filter(img => img && img.complete).length
+        })
+        
+        // Initialize chooser images positions with more robust centering
+        chooserImgRefs.current.forEach((img, i) => {
+          if (!img) return
+          
+          // Force reflow for this specific image
+          img.offsetHeight
+          
+          // Debug image positioning
+          const rect = img.getBoundingClientRect()
+          console.log(`Image ${i} position:`, {
+            rect,
+            computedStyle: window.getComputedStyle(img),
+            isCurrent: i === indexRef.current
+          })
+          
+           // Set initial position - let CSS handle centering, GSAP only handles visibility and horizontal sliding
+           gsap.set(img, { 
+             autoAlpha: i === indexRef.current ? 1 : 0,
+             // Don't use xPercent/yPercent for centering - let CSS handle it
+             x: i === indexRef.current ? 0 : (i < indexRef.current ? -120 : 120) * (img.offsetWidth / 100),
+             y: 0,
+             transformOrigin: 'center center',
+             // Force hardware acceleration
+             force3D: true
+           })
+           
+           // Ensure CSS centering is maintained
+           img.style.position = 'absolute'
+           img.style.top = '50%'
+           img.style.left = '50%'
+           img.style.transform = 'translate(-50%, -50%)'
+           img.style.transformOrigin = 'center center'
+        })
+        
+        // Add subtle floating animation to all chooser fruit images
+        chooserImgRefs.current.forEach((img, i) => {
+          if (!img) return
+          // Only animate the current visible image
+          if (i === indexRef.current) {
+            // Use a separate element or modify transform to avoid conflicts
+            gsap.to(img, {
+              y: -5, // Small vertical movement
+              duration: 0.8 + (i * 0.08), // faster frequency for more natural bounce
+              ease: 'sine.inOut',
+              yoyo: true,
+              repeat: -1,
+              delay: i * 0.12,
+              force3D: true,
+              // Ensure CSS centering is maintained during animation
+              onUpdate: function() {
+                // Keep CSS centering intact
+                img.style.top = '50%'
+                img.style.left = '50%'
+                img.style.transformOrigin = 'center center'
+              }
+            })
+          }
+        })
       })
-    })
+    }
+
+    // Multiple initialization attempts to handle different browser profiles
+    initializeChooser()
+    
+    // Additional attempts with different timings
+    const timeouts = [
+      setTimeout(initializeChooser, 50),
+      setTimeout(initializeChooser, 150),
+      setTimeout(initializeChooser, 300)
+    ]
+    
+    return () => {
+      timeouts.forEach(clearTimeout)
+    }
   }, [])
 
   const go = (dir: 1 | -1) => {
@@ -638,9 +711,50 @@ export default function Home() {
     const nextImg = chooserImgRefs.current[next]
     if (currentImg && nextImg) {
       const toLeft = dir === 1
+      
+      // Calculate slide distances based on image width
+      const slideDistance = currentImg.offsetWidth * 1.2
+      
       gsap.timeline()
-        .to(currentImg, { xPercent: toLeft ? -120 : 120, autoAlpha: 0, duration: 0.5, ease: 'power3.inOut' }, 0)
-        .fromTo(nextImg, { xPercent: toLeft ? 120 : -120, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.inOut' }, 0)
+        .to(currentImg, { 
+          x: toLeft ? -slideDistance : slideDistance, 
+          autoAlpha: 0, 
+          duration: 0.5, 
+          ease: 'power3.inOut' 
+        }, 0)
+        .fromTo(nextImg, { 
+          x: toLeft ? slideDistance : -slideDistance, 
+          autoAlpha: 0 
+        }, { 
+          x: 0, 
+          autoAlpha: 1, 
+          duration: 0.6, 
+          ease: 'power3.inOut',
+          onComplete: () => {
+            // Ensure proper centering after transition
+            nextImg.style.position = 'absolute'
+            nextImg.style.top = '50%'
+            nextImg.style.left = '50%'
+            nextImg.style.transform = 'translate(-50%, -50%)'
+            nextImg.style.transformOrigin = 'center center'
+            
+            // Start floating animation for the new current image
+            gsap.to(nextImg, {
+              y: -5,
+              duration: 0.8,
+              ease: 'sine.inOut',
+              yoyo: true,
+              repeat: -1,
+              force3D: true,
+              onUpdate: function() {
+                // Keep CSS centering intact during animation
+                nextImg.style.top = '50%'
+                nextImg.style.left = '50%'
+                nextImg.style.transformOrigin = 'center center'
+              }
+            })
+          }
+        }, 0)
     }
   }
 
@@ -696,17 +810,47 @@ export default function Home() {
          {/* Clipped rotating holder */}
         <div ref={ringInnerContentRef} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '87.75vmin', aspectRatio: '1 / 1', clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', overflow: 'hidden', zIndex: 3, pointerEvents: 'none' }}>
            {/* Neutral layer counter-rotates so fruit stays upright */}
-           <div ref={ringInnerContentNeutralRef} style={{ position: 'absolute', inset: 0 }}>
-             {fruitImagesOrdered.map((src, i) => (
-               <img
-                 key={i}
-                 ref={(el) => { chooserImgRefs.current[i] = el as HTMLImageElement }}
-                 src={src}
-                 alt="Fruit"
-                 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '82%', height: '82%', objectFit: 'contain', willChange: 'transform, opacity' }}
-               />
-             ))}
-           </div>
+            <div ref={ringInnerContentNeutralRef} style={{ 
+              position: 'absolute', 
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              // Fallback centering
+              minHeight: '100%',
+              minWidth: '100%'
+            }}>
+              {fruitImagesOrdered.map((src, i) => (
+                <img
+                  key={i}
+                  ref={(el) => { chooserImgRefs.current[i] = el as HTMLImageElement }}
+                  src={src}
+                  alt="Fruit"
+                  style={{ 
+                    position: 'absolute', 
+                    top: '50%', 
+                    left: '50%', 
+                    transform: 'translate(-50%, -50%)', 
+                    width: '82%', 
+                    height: '82%', 
+                    objectFit: 'contain', 
+                    willChange: 'transform, opacity',
+                    // Additional centering fallbacks
+                    transformOrigin: 'center center',
+                    margin: 'auto',
+                    // Force hardware acceleration
+                    backfaceVisibility: 'hidden',
+                    perspective: '1000px',
+                    // Ensure proper rendering
+                    imageRendering: 'auto',
+                    // Browser compatibility
+                    WebkitTransform: 'translate(-50%, -50%)',
+                    MozTransform: 'translate(-50%, -50%)',
+                    msTransform: 'translate(-50%, -50%)'
+                  }}
+                />
+              ))}
+            </div>
          </div>
         
         <div className="chooser-wrap" style={{ position: 'relative', width: 'min(1100px, 92vw)', margin: '0 auto', zIndex: 10, display: 'flex', flexDirection: 'column', flex: 1, marginTop: '4rem' }}>
